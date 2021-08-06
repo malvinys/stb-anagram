@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anagram</title>
+</head>
+
+<body>
+    <h1>Anagram</h1>
+    <div>
+        <h2>Input</h2>
+        <p>['kita', 'atik', 'tika', 'aku', 'kia', 'makan', 'kua']</p>
+    </div>
+    <div>
+        <h2>Output</h2>
+        <p id="outputAnagram"></p>
+    </div>
+
+    <script>
+        function anagram(inputs) {
+            const output = [];
+            const uniqueText = [];
+
+            for (let i = 0; i < inputs.length; i++) {
+                const inputA = inputs[i];
+
+                if (!uniqueText.includes(inputA)) {
+                    const uniqueAnagrams = [];
+
+                    for (let j = i; j < inputs.length; j++) {
+                        const inputB = inputs[j];
+
+                        if (!uniqueAnagrams.includes(inputA)) {
+                            uniqueAnagrams.push(inputA);
+                        }
+
+                        if (!uniqueText.includes(inputA)) {
+                            uniqueText.push(inputA);
+                        }
+
+                        if (inputA.length === inputB.length) {
+                            let isPushAnagram = true;
+
+                            for (let k = 0; k < inputA.length; k++) {
+                                if (!inputB.includes(inputA[k])) {
+                                    isPushAnagram = false;
+                                }
+                            }
+
+                            if (isPushAnagram) {
+                                if (!uniqueAnagrams.includes(inputB)) {
+                                    uniqueAnagrams.push(inputB);
+                                }
+
+                                if (!uniqueText.includes(inputB)) {
+                                    uniqueText.push(inputB);
+                                }
+                            }
+                        }
+                    }
+
+                    output.push(uniqueAnagrams);
+                }
+            }
+
+            return output;
+        }
+
+        const getAnagram = anagram(['kita', 'atik', 'tika', 'aku', 'kia', 'makan', 'kua']);
+        document.getElementById("outputAnagram").innerHTML = JSON.stringify(getAnagram);
+    </script>
+</body>
+
+</html>
